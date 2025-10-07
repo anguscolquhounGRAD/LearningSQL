@@ -1,0 +1,223 @@
+USE MyDatabase --This selects the 
+/*database, see the box in the menu top left */
+
+--CHAPTER 1 & 2,Introduction and Query Data (SELECT)
+
+SELECT * 
+FROM customers    --The SELECT command means we 
+/* want to do something, the * means everything and 
+FROM followed by the name of the database shows what 
+we are selecting from */
+
+SELECT 
+first_name,
+country,
+score
+FROM customers  --now we only have three colums 
+
+SELECT *
+FROM customers
+WHERE score != 0 --we can see all the rows which fit the not equal
+/* 0 condition */
+
+SELECT *
+FROM customers
+WHERE country = 'Germany'    -- if the value contains characters not numbers
+/* you must write with quotes */
+
+SELECT
+first_name,
+country
+FROM customers
+WHERE country = 'Germany'    -- if I want to not see certain columns
+
+SELECT * 
+FROM customers
+ORDER BY Score ASC   --will order rows by score ASC means ascending, DESC means decending 
+
+SELECT *
+FROM customers
+ORDER BY
+country ASC,
+score DESC   -- nested sorting
+
+SELECT
+country,
+SUM (score) AS total_score -- there will be no column name, because its no longer the scores, it has been changed
+FROM customers    /* by using AS you can rename, but it does not change the data, just for this query.  */
+GROUP BY country   
+
+SELECT
+country,
+SUM(score),
+COUNT(id)    -- this is used to count the number of people in each country
+FROM customers
+GROUP BY country
+
+SELECT
+country,
+AVG(score)
+FROM customers
+WHERE score != 0
+GROUP BY country
+HAVING AVG(score) > 430
+
+
+SELECT DISTINCT country
+FROM customers
+
+SELECT TOP 3 *
+FROM customers
+
+SELECT TOP 3 * 
+FROM customers
+ORDER BY score DESC
+
+
+SELECT TOP 2 * 
+FROM customers
+ORDER BY score ASC
+
+
+SELECT *
+FROM orders
+
+SELECT TOP 2 *
+FROM orders
+ORDER BY order_date DESC
+
+
+
+
+
+SELECT *
+FROM customers;
+
+SELECT *
+FROM orders;
+--you can do multiple querys in one go
+
+USE MyDatabase
+
+-- Chapter 3, Data Definition (DDL), here we will look a how to structure our database
+
+CREATE TABLE persons (  -- we can create a brand new empty table called persons to put data in using CREATE
+id INT NOT NULL,  -- The first column will be called 'id' and the numbers inside will be integers and must have a value
+person_name VARCHAR(50) NOT NULL, --second column will be called person_name and will be a character of max 50
+birth_date DATE, --we have allowed NULL values (maybe a person did not want to provide birthday info
+phone VARCHAR (15) NOT NULL, 
+CONSTRAINT pk_persons PRIMARY KEY (id) --we have added a primary key to the database, meaning we can link id to other databases
+
+)
+
+SELECT *
+FROM persons -- we do not have any rows because we have no data
+
+
+--lets edit an existing table, below we add a new column
+
+ALTER TABLE persons 
+ADD email VARCHAR(50) NOT NULL
+
+SELECT *
+FROM persons
+
+--If you want to add a new column NOT at the end, you have to create the table again
+
+--Below we remove a cloumn 
+
+ALTER TABLE persons
+DROP COLUMN phone -- not more specification needed it can already spot the column
+
+SELECT *
+FROM persons
+
+-- Deleting the whole table 
+
+DROP TABLE persons --risky command
+
+
+-- Chapter 4 Data Manipulation Language (DML) commands
+
+--Suppose we wanted to add data to our table manually
+
+INSERT INTO customers (id, first_name, country, score)
+VALUES (6, 'Anna', 'USA', NULL),-- this inserts the following info into the row
+(7, 'Sam', NULL, 100)
+
+SELECT * 
+FROM customers  --as you can see we have added two new rows to the bottom 
+
+INSERT INTO customers (id, first_name)
+VALUES 
+(8, 'Sahra') --Only 'nullable' columns can be skipped
+
+
+--What if we want to insert data from a source table, into a target table, so we dont do everything manually?
+
+--Copy data from customers table into persons
+
+
+SELECT --lets have a look at parts of customers table that is relevant to persons
+id,  --take a look athe the object explorer on the right of SQL
+first_name, --our persons table has the columns, id, person name, birth day and phone
+NULL, -- given the customers table only has id and first name
+'Unkown' -- we will have a look at only id and first name, the other columns we will return as null or unkown
+FROM customers
+
+--The above query does not create anything, it only querys the data
+--lets put the result into the table persons
+
+INSERT INTO persons (id, person_name, birth_date, phone)
+SELECT 
+id,  
+first_name, 
+NULL,
+'Unkown'
+FROM customers
+
+SELECT *   -- in summary we wrote a query from the source table then inserted into the target table
+FROM persons
+
+-- how do we update the content existing rows
+
+SELECT *  -- suppose we want to update the value for Anna, from NULL to 0
+FROM customers
+
+UPDATE customers
+SET score = 0 --YOU MUST USE THE WHERE CONDITION TO SPECIFY THE SPECIFIC ROW
+WHERE id = 6 
+
+SELECT * 
+FROM customers
+WHERE id = 6  --use the command to filter the data to check 
+
+UPDATE customers
+SET score = 9
+WHERE score IS NULL -- you can target multiple rows
+
+--Lets delete entire rows
+ 
+DELETE 
+FROM customers
+WHERE id > 5
+
+SELECT *
+FROM customers  -- remember to double check using the where function
+WHERE id > 5
+
+DELETE 
+FROM customers
+WHERE id > 5
+
+SELECT *
+FROM customers
+
+DELETE 
+FROM persons  --this is okay for small tables but for faster way (less computing power)
+
+TRUNCATE TABLE persons --use this command instead
+
+SELECT * 
+FROM persons  --As you can see only the column names remain!
+
