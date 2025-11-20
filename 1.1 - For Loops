@@ -1,0 +1,246 @@
+############# THIS IS MY WORK ON 'FOR LOOPS' in PYTHON ############# 
+
+n = 5
+hamburger = 1
+
+for cheese in range(1, n+1):
+    hamburger *= cheese
+
+print(hamburger)
+
+# above we are doing a factorial , we create a variable called hamburger that loops up the range
+# from 1 to n+1, we must say plus one to include last number.
+# we have set the range to increase or decrease based on the value we give n
+# each iteration, cheese moves up one integer, and we times it by hamburger
+# but hamburger is not only multuiplying with * but reasigning to new value
+
+
+# Nested Loop, create a triangle of astrixes
+
+
+for i in range(1, 10, 2):  #the third condition means we can make it go up (or down) in steps)
+    print(i)
+
+#TAKE BELOW THIS STEP BY STEP, task is to create a triangle of *'s
+
+n = 3
+for i in range(1, n+1):   #What we are saying is that when i is 1 for first iteration, 
+    print("*", end= '')      #we print *, but print automatically creates a new line so by using end = ''
+                              # it just adds a space instead of new line. The iteration happens again, printing another * and no new line
+
+
+for i in range(1, n+1):  #First iteration, i equals 1 so then j loops, in the range (0,1) which only happens once because of the +1 rule
+    for j in range(i):   #So because i equals 1 and print("*", end= '') is indented to first line, we run print * add no new line once
+        print("*", end= '')  #since print() is attached to for j in range(i) and i is 0 in first iteration, then we do not run below which just prints nothing, effectively printing new line
+    print()
+
+# Second iteration, i is now 2, so for j, it runs print * space, once, so we get a star and space, but then j iterates to 2, so it prints * again and space
+#finally new line is created with print() , and so on for n= whatever
+
+
+
+List = [2,3,11]         #A function that gives the product of everything 
+
+def multi(List):           #Define a function call multi, which takes variable, List, which is a list
+    total = 1              #Make a variable and assign it a value of 1
+    for i in List:         #First iteration, i will be 2, so 2 * 1, and because of the =, total is redifined as 2
+        total *= i         #Second iteration, i will be 3, so 2*3, and because of the =, total will be refined as 6
+    return total           #Final Iteration, i will be 11, so 11*6.... 
+                        #return total terminates the function once it has finished iterating
+print(multi(List))
+
+
+
+
+def bignumberscounter(List):
+    total = 0             #Start the counter at 0
+    for i in List:        #First iteration will be 2
+        if i > 10:        #if 2>10 , then add 1 to total
+            total += 1
+    return total
+
+
+print(bignumberscounter(List))
+
+
+List = [2,3,11]   
+  
+
+def countevens(List):               #Counting the number of even numbers in a list
+    total = 0
+    for i in List:
+        if i % 2 == 0:        # the % is a remainder command, if you /2 and there is no remainder its even, so statement becomes true
+            total += i         #When true it goes to the next line
+    return total
+
+print(countevens(List))
+
+
+def reverse_list(List):
+    reversed_list = []       #define reversed_list as an empty list
+    for n in List:                          
+        reversed_list.insert(0, n)          #this means insert
+    return reversed_list
+
+print(reverse_list(List))
+
+                                                 
+
+
+
+
+numbers = [2, 3, 4]
+
+def product(numbers):
+    total = 1
+    for i in numbers:
+        total *= i
+    return total
+
+print(product(numbers))
+
+
+
+numbers = [1, 2, 3, 4, 5, 6]        #counting even numbers
+
+def counteven(numbers):
+    total = 0
+    for i in numbers:
+        if i % 2 == 0:
+            total += 1
+    return total
+
+print(counteven(numbers))
+
+
+numbers = [4, 2, 9, 7, 5]         #identifying max number 
+
+def largestnumber(numbers):
+    maxnumber = 0
+    for i in numbers:
+        if i > maxnumber:
+            maxnumber = i
+    return maxnumber 
+
+print(largestnumber(numbers))
+
+
+#reversing a list
+
+numbers = [4, 2, 9, 7, 5]    
+
+def reverse_numbers(numbers):
+    reversed_numbers = []
+    for i in numbers:
+        reversed_numbers.insert(0,i)
+    return reversed_numbers
+
+print(reverse_numbers(numbers))
+
+      
+
+
+
+for i in range(1,20+1):           #Print numbers 1-20
+    print(i)
+
+
+
+total = 0                           #sum of all numbers 1-100
+for i in range(1, 100+1):
+    total += i
+
+print(total)
+
+
+string = "hello"         
+
+def stringprint(string):              #Print each character in a string 
+    for i in string:
+        print(i)
+
+stringprint(string)
+
+
+string = "hello"
+
+def countvowel(string):          #Count number of vowels
+    total = 0                     
+    for i in string:              
+        if i == "a" or i == "e" or i== "i" or i== "o" or i== "u":
+            total += 1
+    return total
+
+print(countvowel(string))
+
+
+
+number = 7
+
+for i in range(1,10+1):           #Multiplication table of what you assign number to
+    result = 0
+    result = i * number
+    print(result)
+
+
+
+                 
+
+
+for i in range(1, 100+1):       #Loop from 1 to 100, print Fizz if divisble by 3, print buzz if divisible by 5, fizzbuzz if both, else print the number
+    if i % 3 == 0:
+        print("Fizz")
+    if i % 5 == 0:
+        print("buzz")
+    if i % 3 == 0 or i % 5 == 0: 
+        print("Fizzbuzz")
+    if i % 3 != 0 or i % 5 != 0:
+        print(i)
+
+
+                                     #The correct solution is below, my attempt incorrect
+
+for i in range(1, 100+1):
+    if i % 3 == 0 and i % 5 == 0:
+        print("FizzBuzz")
+    elif i % 3 == 0:
+        print("Fizz")
+    elif i % 5 == 0:
+        print("Buzz")
+    else:
+        print(i)
+                                            
+
+                                            #Find the largest number in a list
+        
+
+list = [-1,-4,-3,-9,-6,-6,-4]
+
+def largestnumber(list):                #Find largest number
+    maxnumber = list[0]
+    for i in list:
+        if i > maxnumber:
+            maxnumber = i
+    return maxnumber
+
+print(largestnumber(list))
+
+
+string = "hello"
+
+def reverstring(string):                  #My attempt incorrect, strings do not allow insert
+    for i in string:
+        string.insert(0, i)       
+
+print(reverstring(string))
+
+
+string = "hello"
+
+def reverse_string(string):
+    result = ""
+    for i in string:
+        result = i + result
+    return result
+
+print(reverse_string(string))
