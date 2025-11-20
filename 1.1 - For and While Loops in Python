@@ -1,4 +1,6 @@
-############# THIS IS MY WORK ON 'FOR LOOPS' in PYTHON ############# 
+############# THIS IS MY WORK ON 'FOR' AND 'WHILE' LOOPS in PYTHON ############# 
+
+# 1.1 FOR LOOP 
 
 n = 5
 hamburger = 1
@@ -139,108 +141,38 @@ print(reverse_numbers(numbers))
 
       
 
+# 1.2 While LOOP 
+
+# In a for loop the values we decide to loop over or the range of values is fixed, what if the number of steps is unkown
+# OR suppose the values which we loop are generated dynamically (not known in advance)
 
 
-for i in range(1,20+1):           #Print numbers 1-20
-    print(i)
+# Syntax 
+
+while some_conditon:
+    loop_body   #when the condition is true the loop below will run, once false we exit the loop without executing loop body
 
 
+n = 30 
 
-total = 0                           #sum of all numbers 1-100
-for i in range(1, 100+1):
-    total += i
+result = 0
+while n > 0:
+    n = n // 10          # a double // means integer division, if there is a remainder it discards it
+    result += 1         #^ therefore, if we did 5//3 we would get 1, instead of 1.6666
 
-print(total)
+print(result)
 
+#Fibonacci Numbers -> a sequence  of integers defined recurively. The first two numbers of the sequence are 0 and 1
+#each subsequent number is the sum of the previous 2, so 0,1,1,2,3,5,8,13  . So 0+1 is 1, 1+1 is 2, 1+2 is 3 and so on
+#write a program that prints this sequence not exceeding an integer n
 
-string = "hello"         
+n = 15       
+a = 0           
+b = 1
 
-def stringprint(string):              #Print each character in a string 
-    for i in string:
-        print(i)
-
-stringprint(string)
-
-
-string = "hello"
-
-def countvowel(string):          #Count number of vowels
-    total = 0                     
-    for i in string:              
-        if i == "a" or i == "e" or i== "i" or i== "o" or i== "u":
-            total += 1
-    return total
-
-print(countvowel(string))
-
-
-
-number = 7
-
-for i in range(1,10+1):           #Multiplication table of what you assign number to
-    result = 0
-    result = i * number
-    print(result)
-
-
-
-                 
-
-
-for i in range(1, 100+1):       #Loop from 1 to 100, print Fizz if divisble by 3, print buzz if divisible by 5, fizzbuzz if both, else print the number
-    if i % 3 == 0:
-        print("Fizz")
-    if i % 5 == 0:
-        print("buzz")
-    if i % 3 == 0 or i % 5 == 0: 
-        print("Fizzbuzz")
-    if i % 3 != 0 or i % 5 != 0:
-        print(i)
-
-
-                                     #The correct solution is below, my attempt incorrect
-
-for i in range(1, 100+1):
-    if i % 3 == 0 and i % 5 == 0:
-        print("FizzBuzz")
-    elif i % 3 == 0:
-        print("Fizz")
-    elif i % 5 == 0:
-        print("Buzz")
-    else:
-        print(i)
-                                            
-
-                                            #Find the largest number in a list
+while a <= n:           
+    print(a)            
+    c = a + b
+    a = b
+    b = c
         
-
-list = [-1,-4,-3,-9,-6,-6,-4]
-
-def largestnumber(list):                #Find largest number
-    maxnumber = list[0]
-    for i in list:
-        if i > maxnumber:
-            maxnumber = i
-    return maxnumber
-
-print(largestnumber(list))
-
-
-string = "hello"
-
-def reverstring(string):                  #My attempt incorrect, strings do not allow insert
-    for i in string:
-        string.insert(0, i)       
-
-print(reverstring(string))
-
-
-string = "hello"
-
-def reverse_string(string):
-    result = ""
-    for i in string:
-        result = i + result
-    return result
-
-print(reverse_string(string))
